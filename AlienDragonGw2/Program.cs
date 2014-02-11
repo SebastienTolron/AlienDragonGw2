@@ -14,6 +14,7 @@ namespace AlienDragonGw2
         static void Main(string[] args)
         {
 
+            // Get Data from gw2 APi
             var json = new WebClient().DownloadString("https://api.guildwars2.com/v1/events.json?world_id=1001&map_id=39");
 
             string ColorShatterer = ConfigurationManager.AppSettings["ColorShatterer"];
