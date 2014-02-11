@@ -34,10 +34,10 @@
 *.unsuccessfulbuild
 ipch/
 [Oo]bj/
-[Dd]ebug*/
 [Rr]elease*/
 Ankh.NoLoad
 Debug/
+
 
 #MonoDevelop
 *.pidb
