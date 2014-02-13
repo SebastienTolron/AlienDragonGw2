@@ -15,13 +15,14 @@ namespace AlienDragonGw2
         {
 
             // Get Data from gw2 APi
+
             var json = new WebClient().DownloadString("https://api.guildwars2.com/v1/events.json?world_id=1001&map_id=39");
 
             string ColorShatterer = ConfigurationManager.AppSettings["ColorShatterer"];
             string ColorJormag = ConfigurationManager.AppSettings["ColorJormag"];
             Console.WriteLine("Shatterer {0} ", ColorShatterer);
             Console.WriteLine("Jormag {0} ", ColorJormag);
-            
+
             //Console.WriteLine(json);
             var lightFX = new LightFXController();
 
@@ -42,7 +43,9 @@ namespace AlienDragonGw2
 
 
                 // When the program end , the original lighting configuration is restoreed
-                lightFX.LFX_Release();
+   
+
+
             }
             else
             {

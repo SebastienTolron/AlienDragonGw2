@@ -10,7 +10,9 @@ In order to launch the application , you need to have AlienWareFX running with l
 
 You also need to install vc_x...    ( You can get it from https://www.vssss.com ) 
 
-P.S : To get AlienWareFX running , you need to lunch AlienWare Command Center and put lights on
+
+
+P.S : To get AlienWareFX running , you need to launch AlienWare Command Center and put lights on
 
 ## Installation
 
