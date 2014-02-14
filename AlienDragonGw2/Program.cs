@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Net;
 using System.Threading.Tasks;
 using LightFX;
+using System.Collections;
 
 namespace AlienDragonGw2
 {
@@ -14,9 +15,23 @@ namespace AlienDragonGw2
         static void Main(string[] args)
         {
 
+          
             // Get Data from gw2 APi
 
+            // Event details https://api.guildwars2.com/v1/event_details.json?event_id=598CF3BD-0DF4-4FC7-97EA-AB4515497F5E&lang=fr
+
+            Console.WriteLine("Loading Gw2 datas....");
             var json = new WebClient().DownloadString("https://api.guildwars2.com/v1/events.json?world_id=1001&map_id=39");
+            // Print all events status
+            Hashtable section = (Hashtable)ConfigurationManager.GetSection("DragonSettings/Id");
+            foreach (DictionaryEntry d in section)
+            {
+             Console.WriteLine("{0} ; {1}", d.Key, d.Value);
+           
+            }
+
+
+
 
             string ColorShatterer = ConfigurationManager.AppSettings["ColorShatterer"];
             string ColorJormag = ConfigurationManager.AppSettings["ColorJormag"];
@@ -24,6 +39,7 @@ namespace AlienDragonGw2
             Console.WriteLine("Jormag {0} ", ColorJormag);
 
             //Console.WriteLine(json);
+            Console.WriteLine("Loading AlienWare libraries....");
             var lightFX = new LightFXController();
 
             var result = lightFX.LFX_Initialize();
@@ -43,7 +59,7 @@ namespace AlienDragonGw2
 
 
                 // When the program end , the original lighting configuration is restoreed
-   
+
 
 
             }
