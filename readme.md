@@ -14,7 +14,7 @@ You also need to install vc_x...    ( You can get it from https://www.vssss.com 
 
 P.S : To get AlienWareFX running , you need to launch AlienWare Command Center and put the lights on
 
-## Installation
+## Installation  
 
 You don't have to install this software to use It. Just run the AlienDragonGw2.exe
 
