@@ -27,7 +27,7 @@ namespace AlienDragonGw2
             // Event Active or Inactive  https://api.guildwars2.com/v1/events.json?world_id=1001&event_id=03BF176A-D59F-49CA-A311-39FC6F533F2F
 
             Console.WriteLine("Loading Gw2 datas....");
-
+            Thread.Sleep(2000);
             // On rempli la list des evenements de gw2 avec les parametre de l'application
             List<Event> listEvent = new List<Event>();
             Hashtable sectionDragon = (Hashtable)ConfigurationManager.GetSection("DragonSettings/Id");
@@ -53,8 +53,36 @@ namespace AlienDragonGw2
                 // ajoute l'event à la liste 
                 Event temp = new Event((string)d.Key, (string)d.Value, type, ColorEvent);
                 listEvent.Add(temp);
+
             }
 
+
+            Console.WriteLine("\nLoading AlienWare libraries....");
+            var lightFX = new LightFXController();
+            var result = lightFX.LFX_Initialize();
+            if (result == LFX_Result.LFX_Success)
+            {
+                Thread.Sleep(2000);
+            }
+            else
+            {
+                switch (result)
+                {
+                    case LFX_Result.LFX_Error_NoDevs:
+                        Console.WriteLine("There is not AlienFX device available.");
+                        Console.WriteLine("Done.\r\rPress ENTER key to finish ...");
+                        Console.ReadLine();
+                        break;
+                    default:
+                        Console.WriteLine("There was an error initializing the AlienFX device.");
+                        Console.WriteLine("Done.\r\rPress ENTER key to finish ...");
+                        Console.ReadLine();
+                        break;
+                }
+            }
+
+
+            Console.WriteLine("\nStarting Main Program");
 
 
             // Un thread va tourner pour remplir les valeur True ou False en fonction de si l'event est active ou pas ;
@@ -97,17 +125,10 @@ namespace AlienDragonGw2
             }
 
 
-
-
-            string ColorShatterer = ConfigurationManager.AppSettings["ColorShatterer"];
-            string ColorJormag = ConfigurationManager.AppSettings["ColorJormag"];
-            Console.WriteLine("Shatterer {0} ", ColorShatterer);
-            Console.WriteLine("Jormag {0} ", ColorJormag);
-
             //Console.WriteLine(json);
+            /*
             Console.WriteLine("Loading AlienWare libraries....");
-            var lightFX = new LightFXController();
-
+           // var lightFX = new LightFXController();
             var result = lightFX.LFX_Initialize();
             if (result == LFX_Result.LFX_Success)
             {
@@ -147,7 +168,7 @@ namespace AlienDragonGw2
                         break;
                 }
             }
-
+            */
             return 1;
         }
     }
