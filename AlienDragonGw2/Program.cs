@@ -87,11 +87,11 @@ namespace AlienDragonGw2
 
             // Un thread va tourner pour remplir les valeur True ou False en fonction de si l'event est active ou pas ;
             // Le thread devrai tournée h24 pour que les valeur soit toujour a jour ;
-            /*
-             BgThread threadDragon = new BgThread(*listEvent);
+            
+             BgThread threadDragon = new BgThread(listEvent);
              Thread bgThread = new Thread(new ThreadStart(threadDragon.RunLoop));
              bgThread.IsBackground = true;
-            */
+            
 
 
             // Pour allumer le clavier , il y aura une boucle infini qui va vérifier toutes les 5 secondes le status des evenements et , 
