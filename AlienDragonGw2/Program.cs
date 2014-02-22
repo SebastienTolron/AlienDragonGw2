@@ -101,11 +101,15 @@ namespace AlienDragonGw2
 
                 Thread.Sleep(5000);
                 int i = 0;
+
+                threadDragon.m_lock.WaitOne();
+                
                 for (i = 0; i < listEvent.Count; i++)
                 {
-
                     Console.WriteLine("Event : " + listEvent.ElementAt(i).ToString());
                 }
+
+                threadDragon.m_lock.ReleaseMutex();
 
                 // on parcourt la liste ;
 

@@ -6,11 +6,12 @@ using System.Threading;
 
 class BgThread
 {
-    
+    private List<Event> m_listEvent = null;
+    public Mutex m_lock = new Mutex();
 
-    public BgThread()
+    public BgThread(List<Event> listEvent)
     {
-
+        m_listEvent = listEvent;
     }
 
     public void RunLoop()
@@ -21,7 +22,14 @@ class BgThread
         {
             Thread.Sleep(2000);
             Console.WriteLine(" Test Thread");
-           // this.listEvent:
+
+            m_lock.WaitOne();
+            
+                // this.listEvent:
+
+            
+            m_lock.ReleaseMutex();
+           
         }
 
     }
