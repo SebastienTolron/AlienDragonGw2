@@ -1,0 +1,6 @@
+c:\users\hackman\documents\visual studio 2012\Projects\AlienDragonGw2\AlienDragonGw2\bin\Debug\AlienDragonGw2.exe.config
+c:\users\hackman\documents\visual studio 2012\Projects\AlienDragonGw2\AlienDragonGw2\obj\Debug\AlienDragonGw2.csprojResolveAssemblyReference.cache
+c:\users\hackman\documents\visual studio 2012\Projects\AlienDragonGw2\AlienDragonGw2\bin\Debug\AlienDragonGw2.exe
+c:\users\hackman\documents\visual studio 2012\Projects\AlienDragonGw2\AlienDragonGw2\bin\Debug\AlienDragonGw2.pdb
+c:\users\hackman\documents\visual studio 2012\Projects\AlienDragonGw2\AlienDragonGw2\obj\Debug\AlienDragonGw2.exe
+c:\users\hackman\documents\visual studio 2012\Projects\AlienDragonGw2\AlienDragonGw2\obj\Debug\AlienDragonGw2.pdb
