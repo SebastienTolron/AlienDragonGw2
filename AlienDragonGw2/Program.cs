@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using LightFX;
 using System.Collections;
 using System.Threading;
+using System.ComponentModel;
 
 namespace AlienDragonGw2
 {
@@ -15,7 +16,7 @@ namespace AlienDragonGw2
 
     class Program
     {
-
+        static BackgroundWorker _bw = new BackgroundWorker();
 
         static int Main(string[] args)
         {
@@ -58,6 +59,7 @@ namespace AlienDragonGw2
 
 
             Console.WriteLine("\nLoading AlienWare libraries....");
+            /*
             var lightFX = new LightFXController();
             var result = lightFX.LFX_Initialize();
             if (result == LFX_Result.LFX_Success)
@@ -81,18 +83,22 @@ namespace AlienDragonGw2
                 }
             }
 
-
+*/
             Console.WriteLine("\nStarting Main Program");
 
 
             // Un thread va tourner pour remplir les valeur True ou False en fonction de si l'event est active ou pas ;
             // Le thread devrai tournée h24 pour que les valeur soit toujour a jour ;
-            
+            /*
              BgThread threadDragon = new BgThread(listEvent);
              Thread bgThread = new Thread(new ThreadStart(threadDragon.RunLoop));
              bgThread.IsBackground = true;
-            
+            */
 
+         
+            _bw.DoWork += bw_DoWork;
+            _bw.RunWorkerAsync ("Message to worker");
+           // Console.ReadLine();
 
             // Pour allumer le clavier , il y aura une boucle infini qui va vérifier toutes les 5 secondes le status des evenements et , 
             // en fonction des event va allumer le clavier .
@@ -102,14 +108,14 @@ namespace AlienDragonGw2
                 Thread.Sleep(5000);
                 int i = 0;
 
-                threadDragon.m_lock.WaitOne();
+               // threadDragon.m_lock.WaitOne();
                 
                 for (i = 0; i < listEvent.Count; i++)
                 {
                     Console.WriteLine("Event : " + listEvent.ElementAt(i).ToString());
                 }
 
-                threadDragon.m_lock.ReleaseMutex();
+               // threadDragon.m_lock.ReleaseMutex();
 
                 // on parcourt la liste ;
 
@@ -174,6 +180,16 @@ namespace AlienDragonGw2
             }
             */
             return 1;
+        }
+        static void bw_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                Thread.Sleep(500);
+                // This is called on the worker thread
+                Console.WriteLine(" Update la List");        // writes "Message to worker"
+                // Perfor
+            }
         }
     }
 }

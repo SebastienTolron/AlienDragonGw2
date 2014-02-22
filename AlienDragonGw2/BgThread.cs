@@ -2,6 +2,7 @@
 using AlienDragonGw2;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading;
 
 class BgThread
@@ -14,15 +15,15 @@ class BgThread
         m_listEvent = listEvent;
     }
 
-    public void RunLoop()
+     public void RunLoop()
     {
         String threadName = Thread.CurrentThread.Name;
         
         while(true)
         {
-            Thread.Sleep(2000);
-            Console.WriteLine(" Test Thread");
 
+            Thread.Sleep(500);
+            Console.WriteLine(" Test Thread");
             m_lock.WaitOne();
             
                 // this.listEvent:
@@ -33,4 +34,6 @@ class BgThread
         }
 
     }
+
+ 
 }
