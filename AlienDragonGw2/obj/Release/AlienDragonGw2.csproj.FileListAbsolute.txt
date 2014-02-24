@@ -4,3 +4,5 @@ c:\users\hackman\documents\visual studio 2012\Projects\AlienDragonGw2\AlienDrago
 c:\users\hackman\documents\visual studio 2012\Projects\AlienDragonGw2\AlienDragonGw2\obj\Release\AlienDragonGw2.exe
 c:\users\hackman\documents\visual studio 2012\Projects\AlienDragonGw2\AlienDragonGw2\obj\Release\AlienDragonGw2.pdb
 C:\Users\hackman\documents\visual studio 2012\Projects\AlienDragonGw2\AlienDragonGw2\obj\Release\AlienDragonGw2.csprojResolveAssemblyReference.cache
+C:\Users\hackman\documents\visual studio 2012\Projects\AlienDragonGw2\AlienDragonGw2\bin\Release\Newtonsoft.Json.dll
+C:\Users\hackman\documents\visual studio 2012\Projects\AlienDragonGw2\AlienDragonGw2\bin\Release\Newtonsoft.Json.xml

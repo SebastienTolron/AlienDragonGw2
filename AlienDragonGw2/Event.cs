@@ -44,19 +44,30 @@ namespace AlienDragonGw2
             set { _statusEvent = value; }
         }
 
+        private int _count;
+
+        public int Count
+        {
+            get { return _count; }
+            set { _count = value; }
+        }
+
         public Event(String name, String id, String type, String color)
         {
             this._nameEvent = name;
             this._idEvent = id;
             this._typeEvent = type;
             this._colorEvent = color;
+            this._count = 0;
 
         }
+
+       
 
 
         public override string ToString()
         {
-            return this._nameEvent + " ID = " + this._idEvent + "  Type = " + this._typeEvent + " Color = " + this._colorEvent;
+            return this._nameEvent +" State = "+_statusEvent+ " Color = " + this._colorEvent;
         }
 
     }

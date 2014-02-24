@@ -9,6 +9,9 @@ using LightFX;
 using System.Collections;
 using System.Threading;
 using System.ComponentModel;
+using Newtonsoft;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace AlienDragonGw2
 {
@@ -100,16 +103,19 @@ namespace AlienDragonGw2
 
             while (true)
             {
-
-                Thread.Sleep(5000);
-                int i = 0;
-
-
+                Thread.Sleep(3000);
+                Console.WriteLine("\n ---------- Affichage de la Liste ---------");
+                for (int i = 0; i < m_listEvent.Count; i++)
+                {
+                    Thread.Sleep(500);
+                    Console.WriteLine(m_listEvent.ElementAt(i)+"\n");
+                }
                 // on parcourt la liste ;
 
                 // lorsqu'on trouve un event = true ;
 
                 // En fonction du compteur de l'event :
+
                 // En fonction du type d'event = " contains ('pre') " ;
                 // Si le compteur = 0 on applique la fonction de coloriage ( Pre event ou event Start ) puis on met à 1 
 
@@ -134,13 +140,18 @@ namespace AlienDragonGw2
                 for (int i = 0; i < m_listEvent.Count; i++)
                 {
 
-                    Thread.Sleep(500);
-                    // This is called on the worker thread
-                    var json = new WebClient().DownloadString("https://api.guildwars2.com/v1/events.json?world_id=1001&event_id="+m_listEvent.ElementAt(i));
-                   
-                    Console.WriteLine("{0}", m_listEvent.ElementAt(i));      
-                    // Perfor
+                    Thread.Sleep(2000);                   
+                    WebClient webClient = new WebClient();
+                    var json = webClient.DownloadString("https://api.guildwars2.com/v1/events.json?world_id=2102&event_id=" + m_listEvent.ElementAt(i).IdEvent);
 
+                    JObject o = JObject.Parse(json);
+                    dynamic _eventG = JsonConvert.DeserializeObject(json);
+                    string temp = Convert.ToString(_eventG.events);
+
+                    dynamic _eventFinal = JsonConvert.DeserializeObject(temp.Trim( new Char[] { '{', '\n', '\r','[',']' } ));
+
+                    m_listEvent.ElementAt(i).StatusEvent = _eventFinal.state;
+                      
                 }
 
             }
