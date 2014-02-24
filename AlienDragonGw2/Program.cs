@@ -16,7 +16,8 @@ namespace AlienDragonGw2
 
     class Program
     {
-        static BackgroundWorker _bw = new BackgroundWorker();
+        private static BackgroundWorker _bw = new BackgroundWorker();
+        private static List<Event> m_listEvent = new List<Event>();
 
         static int Main(string[] args)
         {
@@ -30,36 +31,37 @@ namespace AlienDragonGw2
             Console.WriteLine("Loading Gw2 datas....");
             Thread.Sleep(2000);
             // On rempli la list des evenements de gw2 avec les parametre de l'application
-            List<Event> listEvent = new List<Event>();
+
             Hashtable sectionDragon = (Hashtable)ConfigurationManager.GetSection("DragonSettings/Id");
             Hashtable sectionColor = (Hashtable)ConfigurationManager.GetSection("DragonSettings/Color");
             foreach (DictionaryEntry d in sectionDragon)
             {
-                string type = "";
+                String type = "";
                 string eventName = (string)d.Key;
                 string ColorEvent = (string)sectionColor[eventName];
 
                 // Defini le type de l'event 
                 if (eventName.Contains("Pre"))
                 {
-                    Console.WriteLine("Pre Event {0]", d.Value);
+
                     type = "Pre";
                 }
                 else if (eventName.Contains("Main"))
                 {
-                    Console.WriteLine("Main Event {0]", d.Value);
+
                     type = "Main";
                 }
 
                 // ajoute l'event à la liste 
                 Event temp = new Event((string)d.Key, (string)d.Value, type, ColorEvent);
-                listEvent.Add(temp);
+                m_listEvent.Add(temp);
+
 
             }
 
 
             Console.WriteLine("\nLoading AlienWare libraries....");
-            /*
+
             var lightFX = new LightFXController();
             var result = lightFX.LFX_Initialize();
             if (result == LFX_Result.LFX_Success)
@@ -83,39 +85,25 @@ namespace AlienDragonGw2
                 }
             }
 
-*/
+
             Console.WriteLine("\nStarting Main Program");
 
 
             // Un thread va tourner pour remplir les valeur True ou False en fonction de si l'event est active ou pas ;
             // Le thread devrai tournée h24 pour que les valeur soit toujour a jour ;
-            /*
-             BgThread threadDragon = new BgThread(listEvent);
-             Thread bgThread = new Thread(new ThreadStart(threadDragon.RunLoop));
-             bgThread.IsBackground = true;
-            */
 
-         
             _bw.DoWork += bw_DoWork;
-            _bw.RunWorkerAsync ("Message to worker");
-           // Console.ReadLine();
+            _bw.RunWorkerAsync();
 
             // Pour allumer le clavier , il y aura une boucle infini qui va vérifier toutes les 5 secondes le status des evenements et , 
             // en fonction des event va allumer le clavier .
+
             while (true)
             {
 
                 Thread.Sleep(5000);
                 int i = 0;
 
-               // threadDragon.m_lock.WaitOne();
-                
-                for (i = 0; i < listEvent.Count; i++)
-                {
-                    Console.WriteLine("Event : " + listEvent.ElementAt(i).ToString());
-                }
-
-               // threadDragon.m_lock.ReleaseMutex();
 
                 // on parcourt la liste ;
 
@@ -134,62 +122,29 @@ namespace AlienDragonGw2
 
             }
 
-
-            //Console.WriteLine(json);
-            /*
-            Console.WriteLine("Loading AlienWare libraries....");
-           // var lightFX = new LightFXController();
-            var result = lightFX.LFX_Initialize();
-            if (result == LFX_Result.LFX_Success)
-            {
-
-                lightFX.LFX_Reset();
-
-                // Light the keyboard
-                var primaryColor = new LFX_ColorStruct(255, 0, 255, 0);
-                lightFX.LFX_Light(LFX_Position.LFX_All, primaryColor);
-                lightFX.LFX_Update();
-
-
-                Console.WriteLine("Done.\r\rPress ENTER key to finish ...");
-                Console.ReadLine();
-
-                lightFX.LFX_Release();
-
-
-                // When the program end , the original lighting configuration is restoreed
-
-
-
-            }
-            else
-            {
-                switch (result)
-                {
-                    case LFX_Result.LFX_Error_NoDevs:
-                        Console.WriteLine("There is not AlienFX device available.");
-                        Console.WriteLine("Done.\r\rPress ENTER key to finish ...");
-                        Console.ReadLine();
-                        break;
-                    default:
-                        Console.WriteLine("There was an error initializing the AlienFX device.");
-                        Console.WriteLine("Done.\r\rPress ENTER key to finish ...");
-                        Console.ReadLine();
-                        break;
-                }
-            }
-            */
             return 1;
         }
+
+
+        // Methode qui  met à jour la liste des events;
         static void bw_DoWork(object sender, DoWorkEventArgs e)
         {
             while (true)
             {
-                Thread.Sleep(500);
-                // This is called on the worker thread
-                Console.WriteLine(" Update la List");        // writes "Message to worker"
-                // Perfor
+                for (int i = 0; i < m_listEvent.Count; i++)
+                {
+
+                    Thread.Sleep(500);
+                    // This is called on the worker thread
+                    var json = new WebClient().DownloadString("https://api.guildwars2.com/v1/events.json?world_id=1001&event_id="+m_listEvent.ElementAt(i));
+                   
+                    Console.WriteLine("{0}", m_listEvent.ElementAt(i));      
+                    // Perfor
+
+                }
+
             }
         }
     }
+
 }
